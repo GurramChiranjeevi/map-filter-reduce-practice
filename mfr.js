@@ -7,7 +7,7 @@ const countOfBlueRibbons = function(ribbons) {
 } 
 //------------ ribbon completed
 
-const starGazingLog = array => array.flat();
+const starGazingLog = array => array.flat().reduce(uniqueOf, []);
 //-------- star gazing completed
 const countOf = (x, array) => {
   let count = 0;
@@ -29,15 +29,12 @@ const unrepeatedBirds = function(birds) {
 //---------bird watches sees completed
 
 const studentsAttended = function(students) {
-  return uniqueOf(students.flat());
+  return students.flat().reduce(uniqueOf, []);
 }
 
-const uniqueOf = function(array) {
-  const uniqueElements = [];
-  for(let i = 0; i < array.length; i++) {
-    if(!uniqueElements.includes(array[i])) {
-      uniqueElements.push(array[i]);
-    }
+const uniqueOf = function(uniqueElements, currentValue) {
+  if(!uniqueElements.includes(currentValue)) {
+    uniqueElements.push(currentValue);
   }
   return uniqueElements;
 }
@@ -46,6 +43,11 @@ const uniqueOf = function(array) {
 const add = (a,b) => a + b;
 const sumOfArray = function(array) {
   return array.flat().reduce(add);
+}
+//---candies refilled completed
+
+const musicRehearsal = function(array) {
+  return array.some( element => element.includes("do"));
 }
 
 function isArray(x) {
@@ -98,10 +100,11 @@ function testOperation(description, array, expectedOutput, operation ) {
   
   function runAllTests() {
     testOperation("festival ribbon count",["red", "blue", "red", "green", "red", "blue"],2,countOfBlueRibbons );
-    testOperation("stargazing log", [["Orion", "Leo"],["Taurus"],["Orion", "Gemini"]], ["Orion", "Leo", "Taurus", "Orion", "Gemini"], starGazingLog);
+    testOperation("stargazing log", [["Orion", "Leo"],["Taurus"],["Orion", "Gemini"]], ["Orion", "Leo", "Taurus", "Gemini"], starGazingLog);
     testOperation("bird watcher sees ", ["sparrow", "crow", "sparrow", "eagle", "crow"], ["eagle"], unrepeatedBirds);
     testOperation("student attendance",[["Asha", "Ravi", "Neel"],["Ravi"],["Asha", "Meera"]], ["Asha", "Ravi", "Neel", "Meera"], studentsAttended);
     testOperation("total candies refilled",[[5, 3],[2],[4, 1]],15,sumOfArray);
+    testOperation("music rehearsal", [["mi", "fa", "so"],["do", "mi"],["fa"]], true, musicRehearsal);
   }
   
   function main() {
