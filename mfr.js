@@ -9,28 +9,6 @@ const countOfBlueRibbons = function(ribbons) {
 
 const starGazingLog = array => array.flat().reduce(uniqueOf, []);
 //-------- star gazing completed
-const countOf = (x, array) => {
-  let count = 0;
-  for(const element of array) {
-    if(element === x) {
-      count++;
-    }
-  }
-  return count;
-}
-
-const isPresentOnlyOnce = function(value,index, array) { 
-  return countOf(value, array) < 2;
-}
-
-const unrepeatedBirds = function(birds) {
-  return birds.filter(isPresentOnlyOnce);
-}
-//---------bird watches sees completed
-
-const studentsAttended = function(students) {
-  return students.flat().reduce(uniqueOf, []);
-}
 
 const uniqueOf = function(uniqueElements, currentValue) {
   if(!uniqueElements.includes(currentValue)) {
@@ -38,9 +16,20 @@ const uniqueOf = function(uniqueElements, currentValue) {
   }
   return uniqueElements;
 }
+
+const unrepeatedBirds = function(birds) {
+  return birds.reduce(uniqueOf, []);
+}
+//---------bird watches sees completed
+
+const studentsAttended = function(students) {
+  return students.flat().reduce(uniqueOf, []);
+}
+
 //--attendance completed
 //map, filter, reduce, some, every, flat, flatMap
 const add = (a,b) => a + b;
+
 const sumOfArray = function(array) {
   return array.flat().reduce(add);
 }
@@ -49,6 +38,23 @@ const sumOfArray = function(array) {
 const musicRehearsal = function(array) {
   return array.some( element => element.includes("do"));
 }
+//----music rehearsal completed
+const belowNumber = x => x < 32;
+
+const temperatureValidation = function(array) {
+  return array.flat().every(belowNumber);
+}
+//------- temperature validation completed
+const totalMilesRun = function(array) {
+  return array.flat().reduce(add);
+}
+//-------total miles run completed
+const uniqueColors = function (colors) {
+  return colors.flat().reduce(uniqueOf,[]);
+}
+
+
+
 
 function isArray(x) {
   return typeof x === 'object';
@@ -101,10 +107,13 @@ function testOperation(description, array, expectedOutput, operation ) {
   function runAllTests() {
     testOperation("festival ribbon count",["red", "blue", "red", "green", "red", "blue"],2,countOfBlueRibbons );
     testOperation("stargazing log", [["Orion", "Leo"],["Taurus"],["Orion", "Gemini"]], ["Orion", "Leo", "Taurus", "Gemini"], starGazingLog);
-    testOperation("bird watcher sees ", ["sparrow", "crow", "sparrow", "eagle", "crow"], ["eagle"], unrepeatedBirds);
+    testOperation("bird watcher sees ", ["sparrow", "crow", "sparrow", "eagle", "crow"], ["sparrow", "crow", "eagle"], unrepeatedBirds);
     testOperation("student attendance",[["Asha", "Ravi", "Neel"],["Ravi"],["Asha", "Meera"]], ["Asha", "Ravi", "Neel", "Meera"], studentsAttended);
     testOperation("total candies refilled",[[5, 3],[2],[4, 1]],15,sumOfArray);
     testOperation("music rehearsal", [["mi", "fa", "so"],["do", "mi"],["fa"]], true, musicRehearsal);
+    testOperation("temperature validation", [[22, 23],[25, 24, 22],[29]], true, temperatureValidation);
+    testOperation("finding the total miles run", [[2, 3, 2],[4],[1, 1]], 13, totalMilesRun);
+    testOperation("find unique colors used", [["blue", "yellow"],["yellow", "green"],["blue"]],["blue", "yellow", "green"], uniqueColors);
   }
   
   function main() {
