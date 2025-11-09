@@ -1,13 +1,26 @@
-const isBlueRibbon = function(count, ribbonColor) {
-  return (ribbonColor === "blue") ? count + 1: count;
+// const updateIfBlue = function(count, ribbonColor) {
+//   return (ribbonColor === "blue") ? count + 1: count;
+// }
+
+// const updateIfDune = function(count, bookName) {
+//   return bookName === "Dune" ? count + 1: count;
+// }
+
+const countOfElement = function(array, target) {
+  return array.reduce((count, value )=> {
+    return value === target ? count + 1: count ;
+  },0);
 }
 
 const countOfBlueRibbons = function(ribbons) {
-  return ribbons.reduce(isBlueRibbon, 0);
+  return countOfElement(ribbons, "blue");
 } 
+
 //------------ ribbon completed
 
-const starGazingLog = array => array.flat().reduce(uniqueOf, []);
+const starGazingLog = function(logs) {
+  return logs.flat().reduce(uniqueOf, []);
+} 
 //-------- star gazing completed
 
 const uniqueOf = function(uniqueElements, currentValue) {
@@ -30,31 +43,49 @@ const studentsAttended = function(students) {
 //map, filter, reduce, some, every, flat, flatMap
 const add = (a,b) => a + b;
 
-const sumOfArray = function(array) {
-  return array.flat().reduce(add);
+const sumOfCandiesRefilled = function(candies) {
+  return candies.flat().reduce(add);
 }
 //---candies refilled completed
+const doesInclude = function(array,target) {
+  return array.some(element => element.includes(target));
+}
 
-const musicRehearsal = function(array) {
-  return array.some( element => element.includes("do"));
+const anyGroupSangDo = function(musicalNotes) {
+  return doesInclude(musicalNotes, "do");
 }
 //----music rehearsal completed
 const belowNumber = x => x < 32;
 
-const temperatureValidation = function(array) {
-  return array.flat().every(belowNumber);
+const temperatureValidation = function(temperatures) {
+  return temperatures.flat().every(belowNumber);
 }
 //------- temperature validation completed
-const totalMilesRun = function(array) {
-  return array.flat().reduce(add);
+
+const totalMilesRun = function(runnerLogs) {
+  return runnerLogs.flat().reduce(add);
 }
 //-------total miles run completed
+
 const uniqueColors = function (colors) {
   return colors.flat().reduce(uniqueOf,[]);
 }
+//-----unique colors completed
 
 
+const countOfDuneBook = function(booksReturned) {
+  return countOfElement(booksReturned, "Dune");
+}
+//----library return counter completed
 
+const distinctIngredients = function(ingredients) {
+  return ingredients.flat().reduce(uniqueOf, []);
+}
+
+//lunch box ingredients completed
+const anyGroupsangSo = function(musicalNotes) {
+  return doesInclude(musicalNotes, "so");
+}
 
 function isArray(x) {
   return typeof x === 'object';
@@ -105,15 +136,18 @@ function testOperation(description, array, expectedOutput, operation ) {
   }
   
   function runAllTests() {
-    testOperation("festival ribbon count",["red", "blue", "red", "green", "red", "blue"],2,countOfBlueRibbons );
+    testOperation("festival ribbon count",["red", "blue", "red", "green", "red", "blue",'Dune'],2,countOfBlueRibbons );
     testOperation("stargazing log", [["Orion", "Leo"],["Taurus"],["Orion", "Gemini"]], ["Orion", "Leo", "Taurus", "Gemini"], starGazingLog);
     testOperation("bird watcher sees ", ["sparrow", "crow", "sparrow", "eagle", "crow"], ["sparrow", "crow", "eagle"], unrepeatedBirds);
     testOperation("student attendance",[["Asha", "Ravi", "Neel"],["Ravi"],["Asha", "Meera"]], ["Asha", "Ravi", "Neel", "Meera"], studentsAttended);
-    testOperation("total candies refilled",[[5, 3],[2],[4, 1]],15,sumOfArray);
-    testOperation("music rehearsal", [["mi", "fa", "so"],["do", "mi"],["fa"]], true, musicRehearsal);
+    testOperation("total candies refilled",[[5, 3],[2],[4, 1]],15,sumOfCandiesRefilled);
+    testOperation("music rehearsal", [["mi", "fa", "so"],["do", "mi"],["fa"]], true, anyGroupSangDo);
     testOperation("temperature validation", [[22, 23],[25, 24, 22],[29]], true, temperatureValidation);
     testOperation("finding the total miles run", [[2, 3, 2],[4],[1, 1]], 13, totalMilesRun);
     testOperation("find unique colors used", [["blue", "yellow"],["yellow", "green"],["blue"]],["blue", "yellow", "green"], uniqueColors);
+    testOperation("library return counter", ["Dune", "Dune", "Foundation", "Dune"], 3, countOfDuneBook);
+    testOperation("lunch box ingredients", [["rice", "lentils"],["rice"],["curd", "lentils"]], ["rice", "lentils", "curd"], distinctIngredients);
+    testOperation("check any group sang so", [["la", "la"],["mi"],["so", "la"]], true, anyGroupsangSo);
   }
   
   function main() {
