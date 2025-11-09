@@ -1,10 +1,3 @@
-// const updateIfBlue = function(count, ribbonColor) {
-//   return (ribbonColor === "blue") ? count + 1: count;
-// }
-
-// const updateIfDune = function(count, bookName) {
-//   return bookName === "Dune" ? count + 1: count;
-// }
 
 const countOfElement = function(array, target) {
   return array.reduce((count, value )=> {
@@ -87,6 +80,41 @@ const anyGroupsangSo = function(musicalNotes) {
   return doesInclude(musicalNotes, "so");
 }
 
+// -- any group sang so completed
+const vegetableCrateTotals = function (array) {
+  return array.flat().reduce(add);
+}
+
+// --- vegetable crate totals completed
+const uniqueParcelSizes = function(array) {
+  return array.reduce(uniqueOf, []);
+}
+//---post office parcel completed
+
+const deerCountInWildlife = function(animals) {
+  return countOfElement(animals, "deer");
+}
+
+//------count deers completed
+const findAllchapters = function(chaptersByAllGroups) {
+  return chaptersByAllGroups.flat().reduce(uniqueOf, []);
+}
+
+//-----find all chapters completed
+const anySequenceHasTurn = function(steps) {
+  return doesInclude(steps, "turn");
+}
+
+// dance class completed
+const totalWaterUsed = function(waterUsed) {
+  return waterUsed.flat().reduce(add);
+}
+//-----total water used completed
+
+const totalNoOfCranes = function(cranes) {
+  return cranes.flat().reduce(add);
+}
+
 function isArray(x) {
   return typeof x === 'object';
 }
@@ -148,6 +176,13 @@ function testOperation(description, array, expectedOutput, operation ) {
     testOperation("library return counter", ["Dune", "Dune", "Foundation", "Dune"], 3, countOfDuneBook);
     testOperation("lunch box ingredients", [["rice", "lentils"],["rice"],["curd", "lentils"]], ["rice", "lentils", "curd"], distinctIngredients);
     testOperation("check any group sang so", [["la", "la"],["mi"],["so", "la"]], true, anyGroupsangSo);
+    testOperation("vegetable crate totals", [[4, 6],[2, 3, 1],[5]], 21, vegetableCrateTotals);
+    testOperation("find unique parcel sizes", ["small", "large", "medium", "small"], ["small", "large", "medium"], uniqueParcelSizes);
+    testOperation("count deer frequency", ["deer", "deer", "rabbit", "deer"], 3, deerCountInWildlife);
+    testOperation("study group completion chapters",[[1, 2],[3],[2, 4, 1]], [1,2,3,4], findAllchapters);
+    testOperation("dance step classes", [["step", "tap"],["turn", "step"]], true, anySequenceHasTurn);
+    testOperation("garden watering amount", [[1, 2, 1],[3],[2]], 9, totalWaterUsed);
+    testOperation("students making cranes", [[3, 2],[1],[4]], 10, totalNoOfCranes);
   }
   
   function main() {
